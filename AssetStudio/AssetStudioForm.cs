@@ -3063,8 +3063,10 @@ namespace AssetStudio
             assetsfileList.Clear();
             exportableAssets.Clear();
             visibleAssets.Clear();
+            rawStreamList.Clear();
 
             sceneTreeView.Nodes.Clear();
+            rawStreamTree.Nodes.Clear();            
 
             assetListView.VirtualListSize = 0;
             assetListView.Items.Clear();

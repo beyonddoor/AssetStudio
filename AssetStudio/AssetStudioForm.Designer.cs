@@ -95,7 +95,6 @@ namespace AssetStudio
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.sceneTreeView = new AssetStudio.GOHierarchy();
             this.treeSearch = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.assetListView = new System.Windows.Forms.ListView();
@@ -104,7 +103,6 @@ namespace AssetStudio
             this.columnHeaderSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listSearch = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.rawStreamTree = new AssetStudio.GOHierarchy();
             this.progressbarPanel = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.previewPanel = new System.Windows.Forms.Panel();
@@ -137,6 +135,8 @@ namespace AssetStudio
             this.saveFolderDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.treeTip = new System.Windows.Forms.ToolTip(this.components);
             this.selectedRawStreamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sceneTreeView = new AssetStudio.GOHierarchy();
+            this.rawStreamTree = new AssetStudio.GOHierarchy();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -226,7 +226,6 @@ namespace AssetStudio
             this.debugMenuItem.Name = "debugMenuItem";
             this.debugMenuItem.Size = new System.Drawing.Size(87, 21);
             this.debugMenuItem.Text = "Diagnostics";
-            this.debugMenuItem.Visible = false;
             // 
             // buildClassStructuresMenuItem
             // 
@@ -464,17 +463,6 @@ namespace AssetStudio
             this.tabPage1.Text = "Scene Hierarchy";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // sceneTreeView
-            // 
-            this.sceneTreeView.CheckBoxes = true;
-            this.sceneTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sceneTreeView.HideSelection = false;
-            this.sceneTreeView.Location = new System.Drawing.Point(0, 21);
-            this.sceneTreeView.Name = "sceneTreeView";
-            this.sceneTreeView.Size = new System.Drawing.Size(410, 536);
-            this.sceneTreeView.TabIndex = 1;
-            this.sceneTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.sceneTreeView_AfterCheck);
-            // 
             // treeSearch
             // 
             this.treeSearch.Dock = System.Windows.Forms.DockStyle.Top;
@@ -561,16 +549,6 @@ namespace AssetStudio
             this.tabPage4.TabIndex = 2;
             this.tabPage4.Text = "Raw Streams";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // rawStreamTree
-            // 
-            this.rawStreamTree.CheckBoxes = true;
-            this.rawStreamTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rawStreamTree.HideSelection = false;
-            this.rawStreamTree.Location = new System.Drawing.Point(0, 0);
-            this.rawStreamTree.Name = "rawStreamTree";
-            this.rawStreamTree.Size = new System.Drawing.Size(410, 557);
-            this.rawStreamTree.TabIndex = 2;
             // 
             // progressbarPanel
             // 
@@ -886,6 +864,27 @@ namespace AssetStudio
             this.selectedRawStreamsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.selectedRawStreamsToolStripMenuItem.Text = "Selected raw streams";
             this.selectedRawStreamsToolStripMenuItem.Click += new System.EventHandler(this.selectedRawStreamsToolStripMenuItem_Click);
+            // 
+            // sceneTreeView
+            // 
+            this.sceneTreeView.CheckBoxes = true;
+            this.sceneTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sceneTreeView.HideSelection = false;
+            this.sceneTreeView.Location = new System.Drawing.Point(0, 21);
+            this.sceneTreeView.Name = "sceneTreeView";
+            this.sceneTreeView.Size = new System.Drawing.Size(410, 536);
+            this.sceneTreeView.TabIndex = 1;
+            this.sceneTreeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.sceneTreeView_AfterCheck);
+            // 
+            // rawStreamTree
+            // 
+            this.rawStreamTree.CheckBoxes = true;
+            this.rawStreamTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rawStreamTree.HideSelection = false;
+            this.rawStreamTree.Location = new System.Drawing.Point(0, 0);
+            this.rawStreamTree.Name = "rawStreamTree";
+            this.rawStreamTree.Size = new System.Drawing.Size(410, 557);
+            this.rawStreamTree.TabIndex = 2;
             // 
             // AssetStudioForm
             // 
