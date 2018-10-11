@@ -57,6 +57,7 @@ namespace AssetStudio
     public partial class AssetStudioForm : Form
     {
         private List<string> unityFiles = new List<string>(); //files to load
+        private List<BundleFile.MemoryAssetsFile> rawStreamList = new List<BundleFile.MemoryAssetsFile>();
         public static List<AssetsFile> assetsfileList = new List<AssetsFile>(); //loaded files
         private List<AssetPreloadData> exportableAssets = new List<AssetPreloadData>(); //used to hold all assets while the ListView is filtered
         private List<AssetPreloadData> visibleAssets = new List<AssetPreloadData>(); //used to build the ListView from all or filtered assets
@@ -356,7 +357,11 @@ namespace AssetStudio
                 }
                 else
                 {
-                    memFile.memStream.Close();
+                    this.rawStreamList.Add(new BundleFile.MemoryAssetsFile
+                    {
+                        fileName = memFile.fileName,
+                        memStream = memFile.memStream,
+                    });
                 }
             }
 
@@ -794,6 +799,21 @@ namespace AssetStudio
                     jsonMats = new JavaScriptSerializer().Deserialize<Dictionary<string, Dictionary<string, string>>>(matLine);
                     //var jsonMats = new JavaScriptSerializer().DeserializeObject(matLine);
                 }
+            }
+            #endregion
+
+            #region third loop - build raw streams
+            if (true)
+            {
+                rawStreamTree.BeginUpdate();
+                foreach (var rawStream in rawStreamList)
+                {
+                    TreeNode fileNode = new TreeNode();
+                    fileNode.Text = rawStream.fileName;
+                    fileNode.Tag = rawStream;
+                    rawStreamTree.Nodes.Add(fileNode);
+                }
+                rawStreamTree.EndUpdate();
             }
             #endregion
 
@@ -3077,8 +3097,32 @@ namespace AssetStudio
             Properties.Settings.Default["enablePreview"] = enablePreviewMenuItem.Checked;
             Properties.Settings.Default["displayInfo"] = displayAssetInfoMenuItem.Checked;
             Properties.Settings.Default.Save();
-
             foreach (var assetsFile in assetsfileList) { assetsFile.a_Stream.Dispose(); } //is this needed?*/
+        }
+
+        void SaveRawStreams(bool checkedOnly)
+        {
+            foreach (TreeNode node in rawStreamTree.Nodes)
+            {
+                if (node.Checked || !checkedOnly)
+                {
+                    var tag = node.Tag as BundleFile.MemoryAssetsFile;
+                    using (FileStream file = new FileStream(Path.Combine(mainPath, tag.fileName), FileMode.Create, System.IO.FileAccess.Write))
+                    {
+                        tag.memStream.WriteTo(file);
+                    }
+                }
+            }
+        }
+
+        private void rawSteamsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveRawStreams(false);
+        }
+
+        private void selectedRawStreamsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveRawStreams(true);
         }
     }
 }
